@@ -2,6 +2,7 @@ package com.example.planner
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -42,13 +43,19 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.calendar -> {
-                    startActivity(Intent(applicationContext, Calendar::class.java))
+                    val a =Intent(applicationContext, Calendar::class.java)
+                    //a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(a)
+                    finish()
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.tasks -> return@OnNavigationItemSelectedListener true
                 R.id.notes -> {
-                    startActivity(Intent(applicationContext, Notes::class.java))
+                    val b =Intent(applicationContext, Notes::class.java)
+                    //b.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(b)
+                    finish()
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
@@ -56,4 +63,10 @@ class MainActivity : AppCompatActivity() {
             false
         })
     }
+
+    /* override fun onBackPressed() {
+        super.onBackPressed()
+        Toast.makeText(this, "Press Back again to Exit.",
+            Toast.LENGTH_SHORT).show();    } */
+
 }

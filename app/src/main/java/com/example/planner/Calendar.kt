@@ -22,13 +22,19 @@ class Calendar : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.tasks -> {
-                    startActivity(Intent(applicationContext, MainActivity::class.java))
+                    val a =Intent(applicationContext, MainActivity::class.java)
+                    //a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(a)
+                    finish()
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.calendar -> return@OnNavigationItemSelectedListener true
                 R.id.notes -> {
-                    startActivity(Intent(applicationContext, Notes::class.java))
+                    val b =Intent(applicationContext, Notes::class.java)
+                    //b.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(b)
+                    finish()
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
@@ -36,4 +42,9 @@ class Calendar : AppCompatActivity() {
             false
         })
     }
+
+    /* override fun onBackPressed() {
+        //  super.onBackPressed();
+        moveTaskToBack(true)
+    } */
 }
