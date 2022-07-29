@@ -7,4 +7,8 @@
     <string name="add">Add</string>
     <string name="delete_done">Delete done</string>
     <string name="example">Example</string>
+    <string name="add_note">Add Note</string>
+    <string name="description">Description</string>
+    <string name="title">Title</string>
+    <string name="save_note">Save Note</string>
 </resources>

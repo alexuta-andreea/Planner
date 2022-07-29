@@ -2,16 +2,28 @@ package com.example.planner
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.widget.Toast
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.button.MaterialButton
 
 @Suppress("DEPRECATION")
 class Notes : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notes)
+
+        //val addNote = findViewById<Button>(R.id.AddNote)
+
+        //addNote.setOnClickListener {
+            //startActivity(Intent(applicationContext, AddNotes::class.java))
+        //}
+
+        val button: Button = findViewById(R.id.AddNote)
+        button.setOnClickListener {
+            val intent = Intent(this, AddNotes::class.java)
+            startActivity(intent)
+        }
 
         // Initialize and assign variable
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
