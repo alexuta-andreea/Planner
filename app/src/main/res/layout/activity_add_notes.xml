@@ -7,7 +7,7 @@
     tools:context=".AddNotes">
 
     <EditText
-        android:id="@+id/descriptioninput"
+        android:id="@+id/Note"
         android:layout_width="350dp"
         android:layout_height="500dp"
         android:layout_margin="10dp"
@@ -21,21 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/titleinput"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_margin="10dp"
-        android:background="#3000B0FF"
-        android:hint="@string/title"
-        android:padding="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/descriptioninput"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.977" />
-
-    <Button
+    <!-- <Button
         android:id="@+id/SaveNote"
         android:layout_width="160dp"
         android:layout_height="50dp"
@@ -46,6 +32,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descriptioninput"
-        app:layout_constraintVertical_bias="0.253" />
+        app:layout_constraintVertical_bias="0.253" /> -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
