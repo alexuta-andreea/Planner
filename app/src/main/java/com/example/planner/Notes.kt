@@ -10,6 +10,9 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.AdapterView.OnItemLongClickListener
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
 
 @Suppress("DEPRECATION")
 class Notes : AppCompatActivity() {
@@ -21,7 +24,24 @@ class Notes : AppCompatActivity() {
 
     var isLongPress = false
 
-    var sharedPreferences: SharedPreferences? = null
+    override fun onResume() {
+        super.onResume()
+
+        val sharedPreferences = getSharedPreferences("com.example.acer.notepad", MODE_PRIVATE)
+
+        val existingNotes = getList(sharedPreferences)
+
+        if(existingNotes.isEmpty()) {
+            arrayList.add("Press to add new notes")
+        } else {
+            arrayList.clear()
+            arrayList.addAll(existingNotes)
+        }
+
+        arrayAdapter =
+            ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList)
+        notesList?.setAdapter(arrayAdapter)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,24 +49,24 @@ class Notes : AppCompatActivity() {
 
         notesList = findViewById(R.id.NoteList)
 
-        sharedPreferences = getSharedPreferences("com.example.acer.notepad", MODE_PRIVATE)
-        sharedPreferences = getPreferences(MODE_PRIVATE)
-        val noteNo = sharedPreferences?.getInt("NoteNo", -1)
-        if (noteNo != -1) {
-            for (x in 0..noteNo!!) {
-                arrayList.add(
-                    x,
-                    sharedPreferences?.getString(x.toString(), "Press to add new notes").toString()
-                )
-            }
-        } else {
-            arrayList.add(0,"Press to add new notes")
-        }
-        arrayAdapter =
-            ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList)
-        notesList?.setAdapter(arrayAdapter)
-
-        CheckEmptyNote()
+//        sharedPreferences = getSharedPreferences("com.example.acer.notepad", MODE_PRIVATE)
+//        sharedPreferences = getPreferences(MODE_PRIVATE)
+//        val noteNo = sharedPreferences?.getInt("NoteNo", -1)
+//        if (noteNo != -1) {
+//            for (x in 0..noteNo!!) {
+//                arrayList.add(
+//                    x,
+//                    sharedPreferences?.getString(x.toString(), "Press to add new notes").toString()
+//                )
+//            }
+//        } else {
+//            arrayList.add(0,"Press to add new notes")
+//        }
+//        arrayAdapter =
+//            ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList)
+//        notesList?.setAdapter(arrayAdapter)
+//
+//        CheckEmptyNote()
 
 //        notesList?.setOnItemLongClickListener(OnItemLongClickListener { parent, view, p, id ->
 //            isLongPress = true
@@ -85,7 +105,7 @@ class Notes : AppCompatActivity() {
         //val addNote = findViewById<Button>(R.id.AddNote)
 
         //addNote.setOnClickListener {
-            //startActivity(Intent(applicationContext, AddNotes::class.java))
+        //startActivity(Intent(applicationContext, AddNotes::class.java))
         //}
 
         val button: Button = findViewById(R.id.AddNote)
@@ -125,13 +145,13 @@ class Notes : AppCompatActivity() {
         })
     }
 
-    fun CheckEmptyNote() {
-        for (i in arrayList.indices) {
-            if (arrayList.get(i).isEmpty()) {
-                arrayList.set(i, "Press to add new notes")
-            }
-        }
-    }
+//    fun CheckEmptyNote() {
+//        for (i in arrayList.indices) {
+//            if (arrayList.get(i).isEmpty()) {
+//                arrayList.set(i, "Press to add new notes")
+//            }
+//        }
+//    }
 
 //    fun AddNewNote(view: View?) {
 //        arrayList.set(arrayList.size, "Press to add new notes")
@@ -140,4 +160,16 @@ class Notes : AppCompatActivity() {
 //        intent.putExtra("index", arrayList.size - 1)
 //        startActivity(intent)
 //    }
+
+    private fun getList(sharedPreferences: SharedPreferences): MutableList<String> {
+        var arrayItems: List<String> = mutableListOf()
+        val serializedObject: String? = sharedPreferences.getString("AllNotes", null)
+        if (serializedObject != null) {
+            val gson = Gson()
+            val type: Type = object : TypeToken<List<String?>?>() {}.type
+            arrayItems = gson.fromJson(serializedObject, type)
+        }
+
+        return arrayItems.toMutableList()
+    }
 }
