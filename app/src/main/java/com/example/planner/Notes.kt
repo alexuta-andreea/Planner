@@ -4,9 +4,8 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.View
+import android.util.Log
 import android.widget.*
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.AdapterView.OnItemLongClickListener
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -38,6 +37,36 @@ class Notes : AppCompatActivity() {
             arrayList.addAll(existingNotes)
         }
 
+        /////////////////////////////////////////
+
+        notesList?.setOnItemLongClickListener(OnItemLongClickListener { parent, view, p, id ->
+            isLongPress = true
+            val alertDialog = AlertDialog.Builder(this@Notes)
+                .setTitle("Delete note")
+                .setMessage("Are you sure you want to delete it?")
+                .setPositiveButton("Yes") { dialog, which ->
+                    //get current list
+                    val currentList = getList(sharedPreferences)
+                    //remove note from existing list
+                    currentList.removeAt(p)
+                    arrayAdapter?.notifyDataSetChanged()
+                    //save new list to sharedPreferences
+                    saveList(sharedPreferences, currentList)
+                    val refresh = Intent(this, Notes::class.java)
+                    startActivity(refresh)
+                    finish()
+                    Toast.makeText(this@Notes, "Note deleted", Toast.LENGTH_SHORT).show()
+                }
+                .setNegativeButton(
+                    "No"
+                ) { dialog, which -> dialog.dismiss() }
+                .create()
+            alertDialog.show()
+            isLongPress = false
+            true
+        })
+
+        /////////////////////////////////////////
         arrayAdapter =
             ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList)
         notesList?.setAdapter(arrayAdapter)
@@ -47,66 +76,9 @@ class Notes : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notes)
 
+        val sharedPreferences = getSharedPreferences("com.example.acer.notepad", MODE_PRIVATE)
+
         notesList = findViewById(R.id.NoteList)
-
-//        sharedPreferences = getSharedPreferences("com.example.acer.notepad", MODE_PRIVATE)
-//        sharedPreferences = getPreferences(MODE_PRIVATE)
-//        val noteNo = sharedPreferences?.getInt("NoteNo", -1)
-//        if (noteNo != -1) {
-//            for (x in 0..noteNo!!) {
-//                arrayList.add(
-//                    x,
-//                    sharedPreferences?.getString(x.toString(), "Press to add new notes").toString()
-//                )
-//            }
-//        } else {
-//            arrayList.add(0,"Press to add new notes")
-//        }
-//        arrayAdapter =
-//            ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList)
-//        notesList?.setAdapter(arrayAdapter)
-//
-//        CheckEmptyNote()
-
-//        notesList?.setOnItemLongClickListener(OnItemLongClickListener { parent, view, p, id ->
-//            isLongPress = true
-//            val alertDialog = AlertDialog.Builder(this@Notes)
-//                .setIcon(R.drawable.ic_launcher_foreground)
-//                .setTitle("Delete note")
-//                .setMessage("Are you sure you want to delete it")
-//                .setPositiveButton("Yes") { dialog, which ->
-//                    arrayList.removeAt(p)
-//                    arrayAdapter.notifyDataSetChanged()
-//                    Toast.makeText(this@Notes, "Note deleted", Toast.LENGTH_SHORT).show()
-//                    for (x in p until arrayList.size) {
-//                        sharedPreferences.edit()
-//                            .putString(x.toString(), arrayList.get(x))
-//                            .apply()
-//                    }
-//                    sharedPreferences.edit().putInt("NoteNo", arrayList.size - 1)
-//                        .apply()
-//                }
-//                .setNegativeButton(
-//                    "No"
-//                ) { dialog, which -> dialog.dismiss() }
-//                .create()
-//            alertDialog.show()
-//            isLongPress = false
-//            true
-//        })
-//        if (!isLongPress) {
-//            notesList.setOnItemClickListener(OnItemClickListener { parent, view, p, id ->
-//                val intent = Intent(applicationContext, AddNotes::class.java)
-//                intent.putExtra("index", p)
-//                startActivity(intent)
-//            })
-//        }
-
-        //val addNote = findViewById<Button>(R.id.AddNote)
-
-        //addNote.setOnClickListener {
-        //startActivity(Intent(applicationContext, AddNotes::class.java))
-        //}
 
         val button: Button = findViewById(R.id.AddNote)
         button.setOnClickListener {
@@ -145,22 +117,6 @@ class Notes : AppCompatActivity() {
         })
     }
 
-//    fun CheckEmptyNote() {
-//        for (i in arrayList.indices) {
-//            if (arrayList.get(i).isEmpty()) {
-//                arrayList.set(i, "Press to add new notes")
-//            }
-//        }
-//    }
-
-//    fun AddNewNote(view: View?) {
-//        arrayList.set(arrayList.size, "Press to add new notes")
-//        arrayAdapter.notifyDataSetChanged()
-//        val intent = Intent(applicationContext, AddNotes::class.java)
-//        intent.putExtra("index", arrayList.size - 1)
-//        startActivity(intent)
-//    }
-
     private fun getList(sharedPreferences: SharedPreferences): MutableList<String> {
         var arrayItems: List<String> = mutableListOf()
         val serializedObject: String? = sharedPreferences.getString("AllNotes", null)
@@ -172,4 +128,31 @@ class Notes : AppCompatActivity() {
 
         return arrayItems.toMutableList()
     }
+
+    private fun saveList(sharedPreferences: SharedPreferences, notesList: MutableList<String>) {
+        val gson = Gson()
+        val newNotesListToSaveAsString = gson.toJson(notesList)
+
+        Log.d("new list", notesList.toString())
+
+        sharedPreferences.edit().putString("AllNotes", newNotesListToSaveAsString).commit()
+
+        //this.recreate();
+
+        //finish()
+        //overridePendingTransition(0, 0);
+        //startActivity(getIntent());
+        //overridePendingTransition(0, 0);
+
+        //onBackPressed()
+    }
+
+//    fun CheckEmptyNote() {
+//        for (i in arrayList.indices) {
+//            if (arrayList.get(i).isEmpty()) {
+//                arrayList.set(i, "Press to add new notes")
+//            }
+//        }
+//    }
+
 }

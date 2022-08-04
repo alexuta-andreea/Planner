@@ -11,4 +11,7 @@
     <string name="description">Write down your note</string>
     <string name="title">Title</string>
     <string name="save_note">Save Note</string>
+    <string name="task_description">Write down your task</string>
+    <string name="save_task">Save Task</string>
+    <string name="add_task">Add Task</string>
 </resources>

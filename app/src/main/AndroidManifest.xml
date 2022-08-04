@@ -20,6 +20,9 @@
             android:name=".AddNotes"
             android:exported="false" />
         <activity
+            android:name=".AddTasks"
+            android:exported="false" />
+        <activity
             android:name=".Calendar"
             android:exported="false" />
         <activity
