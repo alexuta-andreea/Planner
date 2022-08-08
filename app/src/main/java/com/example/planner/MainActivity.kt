@@ -17,6 +17,10 @@ import java.lang.reflect.Type
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
+//    private var dataModel: ArrayList<DataModel>? = null
+//    //private lateinit var listView: ListView
+//    //private lateinit var adapter: CustomAdapter
+
     var tasksList: ListView? = null
 
     var arrayAdapter: ArrayAdapter<String>? = null
@@ -116,6 +120,17 @@ class MainActivity : AppCompatActivity() {
             }
             false
         })
+
+
+//        //
+//        tasksList?.adapter = arrayAdapter
+//        tasksList?.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+//            val dataModel: DataModel = dataModel!![position] as DataModel
+//            dataModel.checked = !dataModel.checked
+//            arrayAdapter?.notifyDataSetChanged()
+//        }
+//
+//        //
     }
 
     private fun getList(sharedPreferences: SharedPreferences): MutableList<String> {
