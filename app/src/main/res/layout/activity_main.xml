@@ -21,8 +21,10 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ListView
-        android:layout_width="409dp"
-        android:layout_height="621dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent=".9"
+        app:layout_constraintWidth_percent=".9"
         android:id="@+id/TaskList"
         android:paddingTop="48dp"
         app:layout_constraintBottom_toTopOf="@+id/AddTask"
