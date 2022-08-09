@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="indigo">#FF5C6BC0</color>
-    <color name="indigo_dark">#FF26418F</color>
-    <color name="indigo_light">#FF8E99F3</color>
-    <color name="light_indigo">#FFC5CAE9</color>
-    <color name="light_indigo_dark">#FF9499B7</color>
-    <color name="light_indigo_light">#FFF8FDFF</color>
+    <color name="indigo">#FFb388ff</color>
+    <color name="indigo_dark">#FF805acb</color>
+    <color name="indigo_light">#FFe7b9ff</color>
+    <color name="light_indigo">#FFe1bee7</color>
+    <color name="light_indigo_dark">#FFaf8eb5</color>
+    <color name="light_indigo_light">#FFfff1ff</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
