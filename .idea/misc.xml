@@ -5,21 +5,30 @@
       <map>
         <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1175" />
         <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/drawable/background.xml" value="0.1145" />
+        <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/drawable/ic_add.xml" value="0.1875" />
         <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/drawable/ic_baseline_add_task_24.xml" value="0.1175" />
         <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/drawable/ic_launcher_background.xml" value="0.124" />
         <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.113" />
         <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/drawable/ic_splash.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/drawable/selected_bg.xml" value="0.1875" />
         <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/drawable/selector.xml" value="0.2025" />
+        <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/drawable/today_bg.xml" value="0.152" />
         <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/layout/activity_add_notes.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/layout/activity_add_tasks.xml" value="0.25416666666666665" />
-        <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/layout/activity_calendar.xml" value="0.264" />
+        <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/layout/activity_calendar.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/layout/activity_notes.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/layout/activity_splash_screen.xml" value="0.15827338129496402" />
+        <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/layout/calendar_day.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/layout/calendar_day_layout.xml" value="0.25416666666666665" />
-        <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/layout/calendar_month_header_layout.xml" value="0.2" />
+        <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/layout/calendar_day_legend.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/layout/calendar_days_layout.xml" value="0.253125" />
+        <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/layout/calendar_header.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/layout/calendar_month_header_layout.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/layout/default_task.xml" value="0.253125" />
+        <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/layout/event_item_layout.xml" value="0.253125" />
         <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/layout/item_todo.xml" value="0.264" />
+        <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/layout/today_bg.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/menu/menu_navigation.xml" value="0.21822916666666667" />
         <entry key="..\:/AndroidStudioProjects/Planner/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.168" />
         <entry key="..\:/Users/cabel/AndroidStudioProjects/Planner/app/src/main/res/layout/activity_add_notes.xml" value="0.1899365367180417" />
