@@ -30,14 +30,12 @@ class Notes : AppCompatActivity() {
 
         val existingNotes = getList(sharedPreferences)
 
-        if(existingNotes.isEmpty()) {
-            arrayList.add("Press to add new notes")
+        if (existingNotes.isEmpty()) {
+            //
         } else {
             arrayList.clear()
             arrayList.addAll(existingNotes)
         }
-
-        /////////////////////////////////////////
 
         notesList?.setOnItemLongClickListener(OnItemLongClickListener { parent, view, p, id ->
             isLongPress = true
@@ -66,7 +64,6 @@ class Notes : AppCompatActivity() {
             true
         })
 
-        /////////////////////////////////////////
         arrayAdapter =
             ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList)
         notesList?.setAdapter(arrayAdapter)
@@ -137,22 +134,6 @@ class Notes : AppCompatActivity() {
 
         sharedPreferences.edit().putString("AllNotes", newNotesListToSaveAsString).commit()
 
-        //this.recreate();
-
-        //finish()
-        //overridePendingTransition(0, 0);
-        //startActivity(getIntent());
-        //overridePendingTransition(0, 0);
-
-        //onBackPressed()
     }
-
-//    fun CheckEmptyNote() {
-//        for (i in arrayList.indices) {
-//            if (arrayList.get(i).isEmpty()) {
-//                arrayList.set(i, "Press to add new notes")
-//            }
-//        }
-//    }
 
 }

@@ -7,22 +7,14 @@
     android:background="@drawable/bg_tr"
     tools:context=".Calendar">
 
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/calendar"-->
-<!--        android:textSize="50sp"-->
-<!--        android:textStyle="bold"-->
-<!--        android:layout_centerInParent="true"/>-->
+        <com.kizitonwose.calendarview.CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cv_dayViewResource="@layout/calendar_day"
+            app:cv_monthHeaderResource="@layout/calendar_header" />
 
-    <com.kizitonwose.calendarview.CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cv_dayViewResource="@layout/calendar_day"
-        app:cv_monthHeaderResource="@layout/calendar_header" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+<com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="60dp"

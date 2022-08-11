@@ -10,7 +10,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
 
-class AddTasks : AppCompatActivity()  {
+class AddTasks : AppCompatActivity() {
 
     var para: EditText? = null
     var saveBtn: Button? = null
@@ -28,39 +28,66 @@ class AddTasks : AppCompatActivity()  {
         }
     }
 
-    private fun saveTaskToSharedPref(sharedPreferences: SharedPreferences, newTask: String) {
+    fun saveTaskToSharedPref(sharedPreferences: SharedPreferences, newTask: String) {
         //get current list
         val currentList = getList(sharedPreferences)
+        val currentFlags = getIsDone(sharedPreferences)
 
         //add new note to existing list
         currentList.add(newTask)
+        currentFlags.add(false)
 
         //save new list to sharedPreferences
         saveList(sharedPreferences, currentList)
+        saveIsDone(sharedPreferences, currentFlags)
+        onBackPressed()
 
     }
 
-    private fun getList(sharedPreferences: SharedPreferences): MutableList<String> {
-        var arrayItems: List<String> = mutableListOf()
-        val serializedObject: String? = sharedPreferences.getString("AllTasks", null)
-        if (serializedObject != null) {
-            val gson = Gson()
-            val type: Type = object : TypeToken<List<String?>?>() {}.type
-            arrayItems = gson.fromJson(serializedObject, type)
+    companion object {
+        fun getList(sharedPreferences: SharedPreferences): MutableList<String> {
+            var arrayItems: List<String> = mutableListOf()
+            val serializedObject: String? = sharedPreferences.getString("AllTasks", null)
+            if (serializedObject != null) {
+                val gson = Gson()
+                val type: Type = object : TypeToken<List<String?>?>() {}.type
+                arrayItems = gson.fromJson(serializedObject, type)
+            }
+
+            return arrayItems.toMutableList()
         }
 
-        return arrayItems.toMutableList()
-    }
+        fun getIsDone(sharedPreferences: SharedPreferences): MutableList<Boolean> {
+            var arrayItems: List<Boolean> = mutableListOf()
+            val serializedObject: String? = sharedPreferences.getString("Flag", null)
+            if (serializedObject != null) {
+                val gson = Gson()
+                val type: Type = object : TypeToken<List<Boolean?>?>() {}.type
+                arrayItems = gson.fromJson(serializedObject, type)
+            }
 
-    private fun saveList(sharedPreferences: SharedPreferences, tasksList: MutableList<String>) {
-        val gson = Gson()
-        val newTasksListToSaveAsString = gson.toJson(tasksList)
+            return arrayItems.toMutableList()
+        }
 
-        Log.d("new list", tasksList.toString())
+        fun saveList(sharedPreferences: SharedPreferences, tasksList: MutableList<String>) {
+            val gson = Gson()
+            val newTasksListToSaveAsString = gson.toJson(tasksList)
 
-        sharedPreferences.edit().putString("AllTasks", newTasksListToSaveAsString).commit()
+            Log.d("new list", tasksList.toString())
 
-        onBackPressed()
+            sharedPreferences.edit().putString("AllTasks", newTasksListToSaveAsString).commit()
+        }
+
+        fun saveIsDone(sharedPreferences: SharedPreferences, doneList: MutableList<Boolean>) {
+            val gson = Gson()
+            val newFlags = gson.toJson(doneList)
+
+            Log.d("new flags", doneList.toString())
+
+            sharedPreferences.edit().putString("Flag", newFlags).commit()
+
+        }
+
     }
 
 }

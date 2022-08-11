@@ -5,19 +5,22 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.CalendarView
+import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner
+import com.kizitonwose.calendarview.model.ScrollMode
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
 import com.kizitonwose.calendarview.ui.ViewContainer
 import kotlinx.android.synthetic.main.activity_calendar.*
+import org.w3c.dom.Text
 import java.time.DayOfWeek
+import java.time.LocalDate
 import java.time.YearMonth
+import java.time.format.DateTimeFormatter
 import java.time.temporal.WeekFields
 import java.util.*
 
@@ -31,7 +34,11 @@ class Calendar : AppCompatActivity() {
         calendarView.dayBinder = object : DayBinder<DayViewContainer> {
             override fun create(view: View) = DayViewContainer(view)
             override fun bind(container: DayViewContainer, day: CalendarDay) {
+                // Set the calendar day for this container.
+                container.day = day
+                // Set the date text
                 container.textView.text = day.date.dayOfMonth.toString()
+                // Other binding logic
                 if (day.owner == DayOwner.THIS_MONTH) {
                     container.textView.setTextColor(Color.BLACK)
                 } else {
@@ -40,9 +47,26 @@ class Calendar : AppCompatActivity() {
             }
         }
 
+        class DayViewContainer(view: View) : ViewContainer(view) {
+            val textView = view.findViewById<TextView>(R.id.exThreeDayText)
+
+            // Will be set when this container is bound
+            lateinit var day: CalendarDay
+
+            init {
+                view.setOnClickListener {
+                    // Use the CalendarDay associated with this container.
+                }
+            }
+        }
+
         val currentMonth = YearMonth.now()
-        val firstMonth = currentMonth.minusMonths(0)
-        val lastMonth = currentMonth.plusMonths(0)
+        val firstMonth = currentMonth.minusMonths(6)
+        val lastMonth = currentMonth.plusMonths(6)
+
+        calendarView.orientation = LinearLayout.HORIZONTAL
+        calendarView.scrollMode = ScrollMode.PAGED
+
         calendarView.setup(firstMonth, lastMonth, DayOfWeek.MONDAY)
         calendarView.scrollToMonth(currentMonth)
 
@@ -52,7 +76,8 @@ class Calendar : AppCompatActivity() {
         calendarView.monthHeaderBinder = object : MonthHeaderFooterBinder<MonthViewContainer> {
             override fun create(view: View) = MonthViewContainer(view)
             override fun bind(container: MonthViewContainer, month: CalendarMonth) {
-                container.textView.text = "${month.yearMonth.month.name.toLowerCase().capitalize()} ${month.year}"
+                container.textView.text =
+                    "${month.yearMonth.month.name.toLowerCase().capitalize()} ${month.year}"
             }
         }
 
@@ -66,7 +91,7 @@ class Calendar : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.tasks -> {
-                    val a =Intent(applicationContext, MainActivity::class.java)
+                    val a = Intent(applicationContext, MainActivity::class.java)
                     //a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity(a)
                     finish()
@@ -75,7 +100,7 @@ class Calendar : AppCompatActivity() {
                 }
                 R.id.calendar -> return@OnNavigationItemSelectedListener true
                 R.id.notes -> {
-                    val b =Intent(applicationContext, Notes::class.java)
+                    val b = Intent(applicationContext, Notes::class.java)
                     //b.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity(b)
                     finish()
@@ -87,8 +112,4 @@ class Calendar : AppCompatActivity() {
         })
     }
 
-    /* override fun onBackPressed() {
-        //  super.onBackPressed();
-        moveTaskToBack(true)
-    } */
 }
